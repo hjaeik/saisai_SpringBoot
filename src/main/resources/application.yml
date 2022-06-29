@@ -1,0 +1,56 @@
+server:
+  tomcat:
+    threads:
+      max: 200 # 생성할 수 있는 thread의 총 개수
+      min-spare: 10 # 항상 활성화 되어있는(idle) thread의 개수
+    accept-count: 100 # 작업 큐의 사이즈
+spring:
+  data:
+    mongodb:
+      host: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+      port: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+      url: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+      username: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+      database: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+      password: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB 정보를 입력해주세요
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB정보를 입력해주세요
+            clientSecret: # hjaeik 개인프로젝트 입니다. 테스트하시려면 DB정보를 입력해주세요
+            scope: # 각 플랫폼마다 scope 가 다르므로 직접 방문해서 api 문서를 참고 바람
+              - email
+              - profile
+
+# cors 설정
+cors:
+  allowed-origins: '*'
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: '*'
+  max-age: 3600
+
+# jwt secret key 설정
+jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+
+app:
+  auth:
+    #    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC # JWT를 암호화 하기 위한 암호화 키 (32글자면 된다)
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC # JWT를 암호화 하기 위한 암호화 키 (32글자면 된다)
+    #    tokenExpirationMsec: 864000000  # token 만료 기간 (24h * 60min * 60s * 1000ms)
+    #    tokenExpiry: 1800000
+    tokenExpiry: 604800000
+    refreshTokenExpiry: 604800000
+  oauth2:
+    # OAuth2 공급자로 성공적으로 인증 한 후 사용자에 대한 인증 토큰을 생성하고 토큰을
+    # 프론트 엔드 클라이언트가 /oauth2/authorize 요청에서 지정한 redirectUri 입니다.
+    # 쿠키는 모바일 클라이언트에서 잘 작동하지 않기 때문에 사용하지 않습니다
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+  firebase:
+    firebase-create-scoped: "https://www.googleapis.com/auth/firebase.messaging"
+    firebase-multicast-message-size: 500
+#spring.data.mongodb.authentication-database=admin

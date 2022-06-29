@@ -1,15 +1,14 @@
 package com.saisai.web.exception;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public class ExternalException extends RuntimeException{
-    private HttpStatus status;
+    private ErrorCode errorCode;
     private String message;
 
-    public ExternalException(HttpStatus status, String message) {
-        this.status = status;
+    public ExternalException(ErrorCode errorCode, String message) {
+        this.errorCode = errorCode;
         this.message = message;
     }
 }
